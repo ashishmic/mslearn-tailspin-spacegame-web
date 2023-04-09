@@ -7,24 +7,24 @@ trigger:
 - '*'
 
 pool:
-  name: Default
+  name: 'Default' # Replace Default with the name of your agent pool if you used a different pool
 
 variables:
   buildConfiguration: 'Release'
 
 steps:
-  -task: UseDotNet@2
-   displayName: 'Use .NET SDK 6.x'
-   inputs:
-     packagetype: sdk
-     version: '6.x'
-  
-  -task: Npm@1
-   displayName: 'Run npm install'
-   inputs: 
-     verbose: false
+- task: UseDotNet@2
+  displayName: 'Use .NET SDK 6.x'
+  inputs:
+    packageType: sdk
+    version: '6.x'
 
-  - script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
+- task: Npm@1
+  displayName: 'Run npm install'
+  inputs:
+    verbose: false
+
+- script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
   displayName: 'Compile Sass assets'
 
 - task: gulp@1
